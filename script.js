@@ -1,19 +1,19 @@
-var $start = document.querySelector('#start');
-var $game = document.querySelector('#game');
+var start = document.querySelector('#start');
+var game = document.querySelector('#game');
 var $time = document.querySelector('#time');
-var $timeHeader = document.querySelector('#time-header');
-var $resultHeader= document.querySelector('#result-header');
-var $result = document.querySelector('#result');
-var $gameTime = document.querySelector('#game-time');
+var timeHeader = document.querySelector('#time-header');
+var resultHeader= document.querySelector('#result-header');
+var result = document.querySelector('#result');
+var gameTime = document.querySelector('#game-time');
 
 /*Счет в игре, количество нажатий на квадрат*/
 var score = 0;
 /*Условия работы игры*/
 var isGameStarted = false;
 
-$start.addEventListener('click', startGame);
-$game.addEventListener('click', handleBoxClick);
-$gameTime.addEventListener('input', setGameTime);
+start.addEventListener('click', startGame);
+game.addEventListener('click', handleBoxClick);
+gameTime.addEventListener('input', setGameTime);
 
 /*Создадим функции, чтобы неповторятся (DRY)*/
 function show($show){
@@ -26,10 +26,10 @@ function hide($hide){
 function startGame() {
 	setGameTime();
 	score = 0;
-	$gameTime.setAttribute('disabled', 'true');
+	gameTime.setAttribute('disabled', 'true');
 	isGameStarted = true;
-	hide($start);
-	$game.style.backgroundColor = '#fff';
+	hide(start);
+	game.style.backgroundColor = '#fff';
 	/*Создаем интервал для расчета времени*/
 	var interval = setInterval(function() {
 		var time = parseFloat($time.textContent);
@@ -45,27 +45,27 @@ function startGame() {
 }
 
 function setGameTime(){
-	var time = +$gameTime.value;
+	var time = +gameTime.value;
 	$time.textContent = time.toFixed(1);
-	show($timeHeader);
-	hide($resultHeader);
+	show(timeHeader);
+	hide(resultHeader);
 }
 
 /*Выводим результат в конце игры*/
 function setGameScore(){
-	$result.textContent = score.toString()
+	result.textContent = score.toString()
 }
 
 /*Создаем функцию для прекращения игры, когда время 0*/
 function endGame(){
 	isGameStarted = false;
 	setGameScore();
-	show($start);
-	$game.style.backgroundColor = '#ccc';
-	$game.innerHTML= '';
-	hide($timeHeader);
-	show($resultHeader);
-	$gameTime.removeAttribute('disabled');
+	show(start);
+	game.style.backgroundColor = '#ccc';
+	game.innerHTML= '';
+	hide(timeHeader);
+	show(resultHeader);
+	gameTime.removeAttribute('disabled');
 }
 
 /*Создаем отзывчивость по клику в поле game на 
@@ -83,10 +83,10 @@ function handleBoxClick(event){
 /*Создаем функцию, которая будет генерировать 
 квадраты*/
 function renderBox(){
-	$game.innerHTML = '';
+	game.innerHTML = '';
 	var box = document.createElement('div');
 	var boxSize = getRandom(30,100);
-	var gameSize = $game.getBoundingClientRect();
+	var gameSize = game.getBoundingClientRect();
 	var maxTop = gameSize.height - boxSize;
 	var maxLeft = gameSize.width - boxSize;
 	box.style.height = box.style.width = boxSize+'px';
@@ -96,7 +96,7 @@ function renderBox(){
 	box.style.left = getRandom(0,maxLeft) + 'px';
 	box.style.cursor = 'pointer';
 	box.setAttribute('data-box', 'true');
-	$game.insertAdjacentElement('afterbegin', box);
+	game.insertAdjacentElement('afterbegin', box);
 }
 
 function getRandom(min,max){
