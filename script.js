@@ -22,8 +22,6 @@ function show($show){
 function hide($hide){
 	$hide.classList.add('hide');
 }
-
-
 //Начало игры
 function startGame() {
 	setGameTime();
@@ -32,10 +30,10 @@ function startGame() {
 	isGameStarted = true;
 	hide($start);
 	$game.style.backgroundColor = '#fff';
-	
 	/*Создаем интервал для расчета времени*/
 	var interval = setInterval(function() {
 		var time = parseFloat($time.textContent);
+
 		if (time <= 0){
 			clearInterval(interval);
 			endGame();
@@ -75,33 +73,22 @@ function endGame(){
 function handleBoxClick(event){
 
 	if (!isGameStarted){
-		return 
-		/*для того, что бы функция ничего не выводила
-		оставляем пустой ретурн*/
+		return
 	}
-
-	/*Если у эелемента есть дата-бокс, 
-	то значит, что мы кликнули именно по квадрату
-	внутри игрового поля, у которого нет дата-бокс*/
 	if (event.target.dataset.box){
 		score++;
 		renderBox();
 	}
 }
-
 /*Создаем функцию, которая будет генерировать 
 квадраты*/
 function renderBox(){
-
 	$game.innerHTML = '';
 	var box = document.createElement('div');
 	var boxSize = getRandom(30,100);
 	var gameSize = $game.getBoundingClientRect();
-
-	/*Максимальное отклонение от верхней части поля*/
 	var maxTop = gameSize.height - boxSize;
 	var maxLeft = gameSize.width - boxSize;
-
 	box.style.height = box.style.width = boxSize+'px';
 	box.style.position = 'absolute';
 	box.style.backgroundColor = getRandomColor();
@@ -109,12 +96,9 @@ function renderBox(){
 	box.style.left = getRandom(0,maxLeft) + 'px';
 	box.style.cursor = 'pointer';
 	box.setAttribute('data-box', 'true');
-
 	$game.insertAdjacentElement('afterbegin', box);
-
 }
 
-/*Создаем функцию, генерирующую рандомные квадраты*/
 function getRandom(min,max){
 	return Math.floor(Math.random() *(max-min)+min);
 }
