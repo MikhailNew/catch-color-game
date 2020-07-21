@@ -1,3 +1,5 @@
-1) Download
-2) Go to browser index.html
-3) Game
+Just game and relax!
+Сatch as many flowers as possible in time.
+
+
+https://mikhailnew.github.io/catch-color-game/
