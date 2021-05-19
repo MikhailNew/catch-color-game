@@ -47,7 +47,7 @@ function setGameTime() {
 }
 
 function setGameScore() {
-	result.textContent = score.toString()ж
+	result.textContent = score.toString();
 }
 
 function endGame() {
